@@ -6,6 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.time.Duration;
+
 
 public class TestConta {
 
@@ -45,5 +47,14 @@ public class TestConta {
         conta.sacar(155);
 
         Assert.assertEquals(0, conta.getSaldo(), 0.1);
+    }
+
+    @Test
+    @DisplayName("TC-04: Não deve demorar mais que 3 segundos para finalizar a operação")
+    public void naoDeveDemorarMaisQueTresSegundos(){
+
+        Assertions.assertTimeout(Duration.ofSeconds(3), ()->{
+            conta.sacarLento(3.0);
+        });
     }
 }
