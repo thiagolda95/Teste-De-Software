@@ -25,6 +25,19 @@ public class Conta {
         }
     }
 
+    public void sacarLento(double valor){
+        if(valor>getSaldo()){
+            throw new SaqueMaiorQueSaldoException("Valor não pode ser maior que o saldo atual");
+        }
+        saldo-=valor;
+
+        try {
+            Thread.sleep(6* 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     public double getSaldo(){
         return this.saldo;
     }
